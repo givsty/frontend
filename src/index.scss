@@ -45,5 +45,19 @@ body {
   .wrapper__content {
     padding: 40px;
     margin: 0;
+    align-items: center;
+  }
+  .card__sneakers{
+    display: flex;
+    .card {
+      margin: 40px;
+      border: 1px solid black;
+      width: 210px;
+      height: 260px;
+      align-items: center;
+      ul {
+        list-style: none;
+      }
+    }
   }
 } 

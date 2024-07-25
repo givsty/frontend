@@ -1,6 +1,7 @@
 import React from 'react'
-
+import Card from './components/Card'
 const App: React.FC = () => {
+  const sneakers = [1, 2, 3, 4]
   return (
     <div className="wrapper">
       <header>
@@ -17,16 +18,23 @@ const App: React.FC = () => {
           <ul>
             <li><img width={18} height={18}  src="/images/header/basket.png" alt="" /> <span>1205 руб.</span> </li>
             <li><img width={18} height={18}  src="/images/header/favorites.png" alt="" /> <span>Закладки</span> </li>
-            <li><img width={18} height={18}  src="/images/header/brand.png" alt="" /> <span>Профиль</span> </li>
+            <li><img width={18} height={18}  src="/images/header/profile.png" alt="" /> <span>Профиль</span> </li>
           </ul>
         </div>
       </header>
       <div className="line"></div>
       <div className="wrapper__content">
         <div className="slider">
-          <img src="" alt="" />
+          <img src="/images/header/content/slider.png" alt="" />
         </div>
         <h1>Все кроссовки</h1>
+      </div>
+      <div className="card__sneakers">
+        {sneakers.map(()=>{
+          return(
+            <Card />
+          )
+        })}
       </div>
     </div>
   )
