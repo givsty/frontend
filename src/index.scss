@@ -2,6 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: system-ui;
   background: rgb(231, 246, 255);
-  
+}
+
+.wrapper {
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
+  background: rgb(255, 255, 255);
+  header {
+    .header__left {
+    }
+  }
 }
