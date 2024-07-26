@@ -56,7 +56,9 @@ const App: React.FC = () => {
       </div>
       <div className="wrapper__content__inner">
         <h1>Все кроссовки</h1>
-        <Input />
+        <div className="wrapper__content__inner__input">
+          <Input />
+        </div>
       </div>
       <div className="card__sneakers">
         {sneakers.map((index) => {
