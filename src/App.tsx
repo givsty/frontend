@@ -61,7 +61,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="card__sneakers">
-        {sneakers.map((index) => {
+        {sneakers.map((sneaker, index) => {
           return <Card key={index} />;
         })}
       </div>

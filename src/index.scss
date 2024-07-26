@@ -41,6 +41,7 @@ body {
 
       li {
         padding-left: 30px;
+
         img {
           cursor: pointer;
         }
@@ -60,10 +61,23 @@ body {
     display: flex;
     padding: 40px;
     justify-content: space-between;
+
     .wrapper__content__inner__input {
       padding-top: 13px;
-      input{
+
+      input {
         border: 1px solid #cecece;
+        box-sizing: border-box;
+        border: 1px solid rgb(243, 243, 243);
+        border-radius: 5px;
+        overflow: hidden;
+        width: 250px;
+        height: 45px;
+
+        :hover {
+          color: rgb(243, 243, 243);
+          ;
+        }
       }
     }
   }
@@ -75,6 +89,7 @@ body {
     gap: 20px;
     padding-top: 40px;
     padding-bottom: 40px;
+
     .card {
       border: 1px solid #f3f3f3;
       padding: 30px;
