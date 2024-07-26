@@ -1,7 +1,9 @@
-import React from 'react'
-import Card from './components/Card'
+import React from "react";
+import Card from "./components/Card";
+import Input from "./ui/Input";
+
 const App: React.FC = () => {
-  const sneakers = [1, 2, 3, 4]
+  const sneakers = [1, 2, 3, 4];
   return (
     <div className="wrapper">
       <header>
@@ -16,9 +18,33 @@ const App: React.FC = () => {
         </div>
         <div className="header__right">
           <ul>
-            <li><img width={18} height={18}  src="/images/header/basket.png" alt="" /> <span>1205 руб.</span> </li>
-            <li><img width={18} height={18}  src="/images/header/favorites.png" alt="" /> <span>Закладки</span> </li>
-            <li><img width={18} height={18}  src="/images/header/profile.png" alt="" /> <span>Профиль</span> </li>
+            <li>
+              <img
+                width={18}
+                height={18}
+                src="/images/header/basket.png"
+                alt=""
+              />{" "}
+              <span>1205 руб.</span>{" "}
+            </li>
+            <li>
+              <img
+                width={18}
+                height={18}
+                src="/images/header/favorites.png"
+                alt=""
+              />{" "}
+              <span>Закладки</span>{" "}
+            </li>
+            <li>
+              <img
+                width={18}
+                height={18}
+                src="/images/header/profile.png"
+                alt=""
+              />{" "}
+              <span>Профиль</span>{" "}
+            </li>
           </ul>
         </div>
       </header>
@@ -27,17 +53,18 @@ const App: React.FC = () => {
         <div className="slider">
           <img src="/images/header/content/slider.png" alt="" />
         </div>
+      </div>
+      <div className="wrapper__content__inner">
         <h1>Все кроссовки</h1>
+        <Input />
       </div>
       <div className="card__sneakers">
-        {sneakers.map(()=>{
-          return(
-            <Card />
-          )
+        {sneakers.map((index) => {
+          return <Card key={index} />;
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default App;
