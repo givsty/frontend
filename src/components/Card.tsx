@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 const Card: React.FC = () => {
-  const [changeFavorite, setChangeFavorite] = useState(1)
+  const [changeFavorite, setChangeFavorite] = useState<boolean>()
+  const [changeAdd, setChangeAdd] = useState<boolean>()
+
+  const toggleAdd = () =>{
+    setChangeAdd(!changeAdd)
+  }
+  const toggleFavoritesActive = () =>{
+    setChangeFavorite(!changeFavorite)
+  }
+  
   return (
     <>
       <div className="card">
         <img
-          src="/images/header/content/favoriteDefault.png"
+          src={changeFavorite ?  "/images/header/content/favoriteActive.png" : "/images/header/content/favoriteDefault.png"}
           alt=""
-          onClick={() => {
-            console.log("Добавить в избранное");
-          }}
+          onClick={toggleFavoritesActive}
         />
         <ul>
           <li>
@@ -29,11 +36,9 @@ const Card: React.FC = () => {
           </ul>
           <div className="add">
             <img
-              src="images/header/content/add.png"
+              src={changeAdd ? "images/header/content/addActive.png" :"images/header/content/add.png"}
               alt=""
-              onClick={() => {
-                console.log("добавить в корзину");
-              }}
+              onClick={toggleAdd}
             />
           </div>
         </div>
