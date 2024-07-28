@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./components/Card";
 import Input from "./ui/Input";
 
 const App: React.FC = () => {
-  const sneakers = [1, 2, 3, 4];
+  const [sneakers, setSneakers] = useState<any[]>([]);
+  const [isloading, setIsloading] = useState<boolean>(true)
+  useEffect(() => {
+    fetch('https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers')
+      .then(response => response.json())
+      .then(
+        res =>{
+          setIsloading(false)
+          setSneakers(res)
+        }
+      )
+  }, [])
+  interface Sneaker {
+    name: string;
+    image: string,
+    element: string
+  }
   return (
     <div className="wrapper">
       <header>
@@ -61,8 +77,8 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="card__sneakers">
-        {sneakers.map((sneaker, index) => {
-          return <Card key={index} />;
+        {sneakers.map((element: Sneaker, index) => {
+          return <Card key ={index} element = {element}/>;
         })}
       </div>
     </div>

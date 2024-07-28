@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-const Card: React.FC = () => {
+
+interface CardProps {
+  element: {
+    name: string;
+    image: string;
+  }
+}
+const Card: React.FC<CardProps> = ({element}) => {
   const [changeFavorite, setChangeFavorite] = useState<boolean>();
   const [changeAdd, setChangeAdd] = useState<boolean>();
-
   const toggleAdd = () => {
     setChangeAdd(!changeAdd);
   };
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
   };
-
   return (
     <>
       <div className="card">
@@ -25,14 +30,14 @@ const Card: React.FC = () => {
         <ul>
           <li>
             <img
-              src="/images/header/card/sneaker.png"
+              src={element.image}
               alt=""
               width={133}
               height={112}
             />
           </li>
         </ul>
-        <span className="">Мужские Кроссовки Nike Blazer Mid Suede</span>
+        <span className="">{element.name}</span>
         <div className="card__footer">
           <ul>
             <li>ЦЕНА:</li>
