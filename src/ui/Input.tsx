@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-const Input: React.FC = () => {
-  const [searchItem, setSearchItem] = useState<string>("");
+interface InputProps {
+  setSearchItem: (text: string) => void;
+}
+
+const Input: React.FC<InputProps> = ({setSearchItem}) => {
   return (
     <input
       placeholder="Поиск..."

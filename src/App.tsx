@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Card from "./components/Card";
 import Input from "./ui/Input";
+import {ISneaker} from './types/types'
+interface Sneaker {
+  name: string;
+  image: string;
+  element: string;
+}
+// interface SearchItem{
+//   any:[]
+// }
 
 const App: React.FC = () => {
-  const [sneakers, setSneakers] = useState<any[]>([]);
-  const [isloading, setIsloading] = useState<boolean>(true)
+  const [sneakers, setSneakers] = useState<Sneaker[]>([]);
+  const [isloading, setIsloading] = useState<boolean>(true);
+  const [searchItem, setSearchItem] = useState<string>("");
   useEffect(() => {
-    fetch('https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers')
-      .then(response => response.json())
-      .then(
-        res =>{
-          setIsloading(false)
-          setSneakers(res)
-        }
-      )
-  }, [])
-  interface Sneaker {
-    name: string;
-    image: string,
-    element: string
-  }
+    fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers")
+      .then((response) => response.json())
+      .then((res) => {
+        setIsloading(false);
+        setSneakers(res);
+      });
+  }, []);
+
+
+  //Filter search
+  const filteredSneakers = sneakers.filter((item)=>{
+    return item.name.toLowerCase().includes(searchItem.toLowerCase())
+  })
   return (
     <div className="wrapper">
       <header>
@@ -73,12 +82,12 @@ const App: React.FC = () => {
       <div className="wrapper__content__inner">
         <h1>Все кроссовки</h1>
         <div className="wrapper__content__inner__input">
-          <Input />
+          <Input setSearchItem={setSearchItem}/>
         </div>
       </div>
       <div className="card__sneakers">
-        {sneakers.map((element: Sneaker, index) => {
-          return <Card key ={index} element = {element}/>;
+        {filteredSneakers.map((element: Sneaker) => {
+          return <Card element={element} />;
         })}
       </div>
     </div>

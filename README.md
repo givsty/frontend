@@ -1,0 +1,4 @@
+**Stack:**
+- ReactJS
+- SCSS
+- TS
