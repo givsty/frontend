@@ -1,19 +1,24 @@
 import React, { useState } from "react";
+
 interface CardProps {
   element: {
     name: string;
     image: string;
   }
 }
+
 const Card: React.FC<CardProps> = ({element}) => {
   const [changeFavorite, setChangeFavorite] = useState<boolean>();
   const [changeAdd, setChangeAdd] = useState<boolean>();
+  
   const toggleAdd = () => {
     setChangeAdd(!changeAdd);
   };
+
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
   };
+  
   return (
     <>
       <div className="card">
@@ -38,7 +43,7 @@ const Card: React.FC<CardProps> = ({element}) => {
         </ul>
         <span className="">{element.name}</span>
         <div className="card__footer">
-          <ul>
+          <ul> 
             <li>ЦЕНА:</li>
             <li>12 999</li>
           </ul>

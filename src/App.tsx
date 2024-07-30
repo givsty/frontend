@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Card from "./components/Card";
 import Input from "./ui/Input";
-import {ISneaker} from './types/types'
+import { ISneaker } from "./types/types";
+import Basket from "./pages/Basket";
+
 interface Sneaker {
   name: string;
   image: string;
+  id: number;
   element: string;
+  baksetItems: ISneaker[]
 }
-// interface SearchItem{
-//   any:[]
-// }
 
 const App: React.FC = () => {
   const [sneakers, setSneakers] = useState<Sneaker[]>([]);
-  const [isloading, setIsloading] = useState<boolean>(true);
+  const [isloading, setIsloading] = useState<boolean>(false);
   const [searchItem, setSearchItem] = useState<string>("");
+  const [basket, setBasket] = useState<boolean>(true);
+  const [baksetItems, setBasketItems] = useState([]);
+
   useEffect(() => {
     fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers")
       .then((response) => response.json())
@@ -24,13 +28,20 @@ const App: React.FC = () => {
       });
   }, []);
 
+  const toggleBasket = () => {
+    setBasket(!basket);
+    setBasketItems(baksetItems.concat([]))
+  };
 
   //Filter search
-  const filteredSneakers = sneakers.filter((item)=>{
-    return item.name.toLowerCase().includes(searchItem.toLowerCase())
-  })
+  const filteredSneakers = sneakers.filter((item) => {
+    return item.name.toLowerCase().includes(searchItem.toLowerCase());
+  });
+
+
   return (
     <div className="wrapper">
+      {!basket ? <Basket toggleBasket = {toggleBasket} baksetItems={baksetItems}/> : ""}
       <header>
         <div className="header__left">
           <div className="header__left__logo">
@@ -49,6 +60,7 @@ const App: React.FC = () => {
                 height={18}
                 src="/images/header/basket.png"
                 alt=""
+                onClick={toggleBasket}
               />{" "}
               <span>1205 руб.</span>{" "}
             </li>
@@ -82,7 +94,7 @@ const App: React.FC = () => {
       <div className="wrapper__content__inner">
         <h1>Все кроссовки</h1>
         <div className="wrapper__content__inner__input">
-          <Input setSearchItem={setSearchItem}/>
+          <Input setSearchItem={setSearchItem} />
         </div>
       </div>
       <div className="card__sneakers">
