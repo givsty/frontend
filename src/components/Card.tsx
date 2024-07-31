@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-
+import { useDispatch, UseDispatch } from "react-redux";
+import { setItemInCart } from "../redux/cart/reducer";
 interface CardProps {
   element: {
+    id:number;
     name: string;
     image: string;
-  }
+  };
 }
 
-const Card: React.FC<CardProps> = ({element}) => {
+const Card: React.FC<CardProps> = ({ element }) => {
   const [changeFavorite, setChangeFavorite] = useState<boolean>();
   const [changeAdd, setChangeAdd] = useState<boolean>();
-  
+  const dispatch = useDispatch();
   const toggleAdd = () => {
     setChangeAdd(!changeAdd);
+    dispatch(setItemInCart(element))
   };
 
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
   };
-  
+
   return (
     <>
       <div className="card">
@@ -33,17 +36,12 @@ const Card: React.FC<CardProps> = ({element}) => {
         />
         <ul>
           <li>
-            <img
-              src={element.image}
-              alt=""
-              width={133}
-              height={112}
-            />
+            <img src={element.image} alt="" width={133} height={112} />
           </li>
         </ul>
         <span className="">{element.name}</span>
         <div className="card__footer">
-          <ul> 
+          <ul>
             <li>ЦЕНА:</li>
             <li>12 999</li>
           </ul>

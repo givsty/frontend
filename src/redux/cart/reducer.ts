@@ -1,14 +1,11 @@
 import {createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Определяем интерфейс для товара
 interface Item {
   id: number;
   name: string;
-  price: number;
-  quantity: number;
+  image: string;
 }
 
-// Определяем начальное состояние
 interface CartState {
   itemsInCart: Item[];
 }

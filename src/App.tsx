@@ -3,12 +3,12 @@ import Card from "./components/Card";
 import Input from "./ui/Input";
 import { ISneaker } from "./types/types";
 import Basket from "./pages/Basket";
+
 interface Sneaker {
   name: string;
   image: string;
   id: number;
   element: string;
-  baksetItems: ISneaker[];
 }
 
 const App: React.FC = () => {
@@ -16,7 +16,6 @@ const App: React.FC = () => {
   const [isloading, setIsloading] = useState<boolean>(false);
   const [searchItem, setSearchItem] = useState<string>("");
   const [basket, setBasket] = useState<boolean>(true);
-  const [baksetItems, setBasketItems] = useState([]);
 
   useEffect(() => {
     fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers")
@@ -29,7 +28,6 @@ const App: React.FC = () => {
 
   const toggleBasket = () => {
     setBasket(!basket);
-    setBasketItems(baksetItems.concat([]));
   };
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const App: React.FC = () => {
   return (
     <div className="wrapper">
       {!basket ? (
-        <Basket toggleBasket={toggleBasket} baksetItems={baksetItems} />
+        <Basket toggleBasket={toggleBasket} />
       ) : (
         ""
       )}
