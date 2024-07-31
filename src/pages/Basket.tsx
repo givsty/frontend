@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CardBasket from "../components/CardBasket";
 import { ISneaker } from "../types/types";
 import { useSelector } from "react-redux";
+
 interface BasketProps {
   toggleBasket: () => void;
 }

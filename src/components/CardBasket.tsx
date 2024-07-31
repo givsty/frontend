@@ -8,7 +8,7 @@ const CardBasket: React.FC<CardBasketProps> = ({baksetItems}) => {
   return (
     <div className="drawer__content" >
       <img src="" alt="" />
-      <span>Мужские кроссовки</span>
+      <span></span>
     </div>
   )
 }
