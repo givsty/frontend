@@ -9,7 +9,7 @@ interface Sneaker {
   image: string;
   id: number;
   element: string;
-  baksetItems: ISneaker[]
+  baksetItems: ISneaker[];
 }
 
 const App: React.FC = () => {
@@ -30,18 +30,29 @@ const App: React.FC = () => {
 
   const toggleBasket = () => {
     setBasket(!basket);
-    setBasketItems(baksetItems.concat([]))
+    setBasketItems(baksetItems.concat([]));
   };
+
+  useEffect(() => {
+    if (!basket) {
+      document.body.style.overflow = "hidden";
+    } else if (basket) {
+      document.body.style.overflow = "";
+    }
+  }, [basket]);
 
   //Filter search
   const filteredSneakers = sneakers.filter((item) => {
     return item.name.toLowerCase().includes(searchItem.toLowerCase());
   });
 
-
   return (
     <div className="wrapper">
-      {!basket ? <Basket toggleBasket = {toggleBasket} baksetItems={baksetItems}/> : ""}
+      {!basket ? (
+        <Basket toggleBasket={toggleBasket} baksetItems={baksetItems} />
+      ) : (
+        ""
+      )}
       <header>
         <div className="header__left">
           <div className="header__left__logo">
