@@ -3,7 +3,6 @@ import Card from "./components/Card";
 import Input from "./ui/Input";
 import { ISneaker } from "./types/types";
 import Basket from "./pages/Basket";
-
 interface Sneaker {
   name: string;
   image: string;
