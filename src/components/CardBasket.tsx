@@ -1,14 +1,14 @@
 import React from 'react'
 import { ISneaker } from "../types/types";
 interface CardBasketProps {
-  baksetItems: ISneaker[]
+  element: ISneaker
 }
-
-const CardBasket: React.FC<CardBasketProps> = ({baksetItems}) => {
+const CardBasket: React.FC<CardBasketProps> = ({element}) => {
   return (
     <div className="drawer__content" >
-      <img src="" alt="" />
-      <span></span>
+      <img src={element.image} alt="" />
+      <span>{element.name}</span>
+      <span>{element.price}</span>
     </div>
   )
 }
