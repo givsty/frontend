@@ -16,8 +16,8 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket}) => {
           <span>Назад</span>
         </div>
         <h3>Корзина</h3>
-        {baksetItems.map((element) => {
-          return <CardBasket element={element}/>;
+        {baksetItems.map((element, index) => {
+          return <CardBasket element={element} key={index}/>;
         })}
       </div>
     </div>

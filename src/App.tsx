@@ -3,8 +3,9 @@ import Card from "./components/Card";
 import Input from "./ui/Input";
 import { ISneaker } from "./types/types";
 import Basket from "./pages/Basket";
-import ContentLoader from "react-content-loader"
+import ContentLoader from "react-content-loader";
 import SkeletonItems from "./components/SkeletonItems";
+
 interface Sneaker {
   name: string;
   image: string;
@@ -18,18 +19,35 @@ const App: React.FC = () => {
   const [isloading, setIsloading] = useState<boolean>(true);
   const [searchItem, setSearchItem] = useState<string>("");
   const [basket, setBasket] = useState<boolean>(true);
+  const [page, setCurrentPage] = useState(1)
+  const [fetching, setFetching] = useState<boolean>(true)
 
   useEffect(() => {
-    fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers")
+    fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?page=3")
       .then((response) => response.json())
       .then((res) => {
         setIsloading(!isloading);
         setSneakers(res);
       });
-  }, []);
+  }, [fetching]);
 
   const toggleBasket = () => {
     setBasket(!basket);
+  };
+
+
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
+  const scrollHandler = (e: Event) => {
+    const target = e.target as Document;
+    if (target.documentElement.scrollHeight - (target.documentElement.scrollTop + window.innerHeight) < 100 )  {
+      setFetching(true)
+    }
   };
 
   useEffect(() => {
@@ -47,11 +65,7 @@ const App: React.FC = () => {
 
   return (
     <div className="wrapper">
-      {!basket ? (
-        <Basket toggleBasket={toggleBasket} />
-      ) : (
-        ""
-      )}
+      {!basket ? <Basket toggleBasket={toggleBasket} /> : ""}
       <header>
         <div className="header__left">
           <div className="header__left__logo">
@@ -108,9 +122,11 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="card__sneakers">
-        {isloading ? [...new Array(10)].map(()=> <SkeletonItems />): filteredSneakers.map((element: Sneaker) => {
-          return <Card element={element} />;
-        })}
+        {isloading
+          ? [...new Array(10)].map((index) => <SkeletonItems key={index}/>)
+          : filteredSneakers.map((element: Sneaker, index) => {
+              return <Card element={element} key={index} />;
+            })}
       </div>
     </div>
   );
