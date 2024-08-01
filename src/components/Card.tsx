@@ -6,6 +6,7 @@ interface CardProps {
     id:number;
     name: string;
     image: string;
+    price: string
   };
 }
 
@@ -42,8 +43,7 @@ const Card: React.FC<CardProps> = ({ element }) => {
         <span className="">{element.name}</span>
         <div className="card__footer">
           <ul>
-            <li>ЦЕНА:</li>
-            <li>12 999</li>
+            <li>{element.price}</li>
           </ul>
           <div className="add">
             <img

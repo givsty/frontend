@@ -3,17 +3,19 @@ import Card from "./components/Card";
 import Input from "./ui/Input";
 import { ISneaker } from "./types/types";
 import Basket from "./pages/Basket";
-
+import ContentLoader from "react-content-loader"
+import SkeletonItems from "./components/SkeletonItems";
 interface Sneaker {
   name: string;
   image: string;
   id: number;
+  price: string;
   element: string;
 }
 
 const App: React.FC = () => {
   const [sneakers, setSneakers] = useState<Sneaker[]>([]);
-  const [isloading, setIsloading] = useState<boolean>(false);
+  const [isloading, setIsloading] = useState<boolean>(true);
   const [searchItem, setSearchItem] = useState<string>("");
   const [basket, setBasket] = useState<boolean>(true);
 
@@ -21,7 +23,7 @@ const App: React.FC = () => {
     fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers")
       .then((response) => response.json())
       .then((res) => {
-        setIsloading(false);
+        setIsloading(!isloading);
         setSneakers(res);
       });
   }, []);
@@ -106,7 +108,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="card__sneakers">
-        {filteredSneakers.map((element: Sneaker) => {
+        {isloading ? [...new Array(10)].map(()=> <SkeletonItems />): filteredSneakers.map((element: Sneaker) => {
           return <Card element={element} />;
         })}
       </div>
