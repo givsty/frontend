@@ -1,5 +1,5 @@
 **Stack:**
-- ReactJS
+- React
 - Redux
 - SCSS
 - TS
