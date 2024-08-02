@@ -3,9 +3,8 @@ import Card from "./components/Card";
 import Input from "./ui/Input";
 import { ISneaker } from "./types/types";
 import Basket from "./pages/Basket";
-import ContentLoader from "react-content-loader";
 import SkeletonItems from "./components/SkeletonItems";
-
+import Header from "./components/Header";
 interface Sneaker {
   name: string;
   image: string;
@@ -19,11 +18,11 @@ const App: React.FC = () => {
   const [isloading, setIsloading] = useState<boolean>(true);
   const [searchItem, setSearchItem] = useState<string>("");
   const [basket, setBasket] = useState<boolean>(true);
-  const [page, setCurrentPage] = useState(1)
-  const [fetching, setFetching] = useState<boolean>(true)
+  const [page, setCurrentPage] = useState(1);
+  const [fetching, setFetching] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?page=3")
+    fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?limit=10")
       .then((response) => response.json())
       .then((res) => {
         setIsloading(!isloading);
@@ -35,7 +34,6 @@ const App: React.FC = () => {
     setBasket(!basket);
   };
 
-
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
     return function () {
@@ -45,8 +43,12 @@ const App: React.FC = () => {
 
   const scrollHandler = (e: Event) => {
     const target = e.target as Document;
-    if (target.documentElement.scrollHeight - (target.documentElement.scrollTop + window.innerHeight) < 100 )  {
-      setFetching(true)
+    if (
+      target.documentElement.scrollHeight -
+        (target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
     }
   };
 
@@ -66,49 +68,7 @@ const App: React.FC = () => {
   return (
     <div className="wrapper">
       {!basket ? <Basket toggleBasket={toggleBasket} /> : ""}
-      <header>
-        <div className="header__left">
-          <div className="header__left__logo">
-            <img width={40} height={40} src="/images/header/brand.png" alt="" />
-          </div>
-          <div className="header__left__text">
-            <h2>REACT SNEAKERS</h2>
-            <p>Магазин лучших кроссовок</p>
-          </div>
-        </div>
-        <div className="header__right">
-          <ul>
-            <li>
-              <img
-                width={18}
-                height={18}
-                src="/images/header/basket.png"
-                alt=""
-                onClick={toggleBasket}
-              />{" "}
-              <span>1205 руб.</span>{" "}
-            </li>
-            <li>
-              <img
-                width={18}
-                height={18}
-                src="/images/header/favorites.png"
-                alt=""
-              />{" "}
-              <span>Закладки</span>{" "}
-            </li>
-            <li>
-              <img
-                width={18}
-                height={18}
-                src="/images/header/profile.png"
-                alt=""
-              />{" "}
-              <span>Профиль</span>{" "}
-            </li>
-          </ul>
-        </div>
-      </header>
+      <Header toggleBasket={toggleBasket} />
       <div className="line"></div>
       <div className="wrapper__content">
         <div className="slider">
@@ -123,7 +83,7 @@ const App: React.FC = () => {
       </div>
       <div className="card__sneakers">
         {isloading
-          ? [...new Array(10)].map((index) => <SkeletonItems key={index}/>)
+          ? [...new Array(10)].map((index) => <SkeletonItems key={index} />)
           : filteredSneakers.map((element: Sneaker, index) => {
               return <Card element={element} key={index} />;
             })}

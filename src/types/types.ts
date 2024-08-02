@@ -4,3 +4,7 @@ export interface ISneaker{
   image: string;
   price: string;
 }
+
+export interface Pages {
+  toggleBasket: () => void;
+}

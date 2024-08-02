@@ -21,6 +21,7 @@ const Card: React.FC<CardProps> = ({ element }) => {
 
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
+    dispatch(setItemInCart(element))
   };
 
   return (

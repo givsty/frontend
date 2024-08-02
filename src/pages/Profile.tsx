@@ -4,7 +4,7 @@ import { ISneaker } from "../types/types";
 import { useSelector } from "react-redux";
 import {Pages} from "../types/types"
 
-const Favorites: React.FC<Pages> = ({ toggleBasket }) => {
+const Profile: React.FC<Pages> = ({ toggleBasket }) => {
   const baksetItems = useSelector(
     (state: { cart: { itemsInCart: ISneaker[] } }) => state.cart.itemsInCart
   );
@@ -25,4 +25,4 @@ const Favorites: React.FC<Pages> = ({ toggleBasket }) => {
   );
 };
 
-export default Favorites;
+export default Profile;
