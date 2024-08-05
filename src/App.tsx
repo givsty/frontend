@@ -5,6 +5,7 @@ import { ISneaker } from "./types/types";
 import Basket from "./pages/Basket";
 import SkeletonItems from "./components/SkeletonItems";
 import Header from "./components/Header";
+import { current } from "@reduxjs/toolkit";
 interface Sneaker {
   name: string;
   image: string;
@@ -22,13 +23,21 @@ const App: React.FC = () => {
   const [fetching, setFetching] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch("https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?limit=10")
-      .then((response) => response.json())
-      .then((res) => {
-        setIsloading(!isloading);
-        setSneakers(res);
-      });
-  }, [fetching]);
+    if(fetching) {
+      fetch(`https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?page=${page}&limit=12`)
+        .then((response) => response.json())
+        .then((res) => {
+          setIsloading(false);
+          setSneakers((prevSneakers) => [...prevSneakers, ...res])
+          setCurrentPage(page => page += 1)
+          setFetching(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          setFetching(false)
+        });
+    }
+  }, [fetching, page]);
 
   const toggleBasket = () => {
     setBasket(!basket);
@@ -83,7 +92,7 @@ const App: React.FC = () => {
       </div>
       <div className="card__sneakers">
         {isloading
-          ? [...new Array(10)].map((index) => <SkeletonItems key={index} />)
+          ? [...new Array(10)].map((_, index) => <SkeletonItems key={index} />)
           : filteredSneakers.map((element: Sneaker, index) => {
               return <Card element={element} key={index} />;
             })}

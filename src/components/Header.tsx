@@ -32,7 +32,6 @@ const Header: React.FC<HeaderProps> = ({toggleBasket}) => {
               height={18}
               src="/images/header/favorites.png"
               alt=""
-              onClick={toggleBasket}
             />{" "}
             <span>Закладки</span>{" "}
           </li>

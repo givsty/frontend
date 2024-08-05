@@ -27,7 +27,9 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
           <CardBasket element={element} key={index} />
         );
         })}
-        <span>Итоговая сумма:{summBasket}</span>
+        <ul>
+          <li><span>Итого<div className="basket-line"></div>{summBasket}</span></li>
+        </ul>
       </div>
     </div>
   );
