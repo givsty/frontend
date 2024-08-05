@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const [basket, setBasket] = useState<boolean>(true);
   const [page, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState<boolean>(true);
-
+  // Response to mock api
   useEffect(() => {
     if(fetching) {
       fetch(`https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?page=${page}&limit=12`)
@@ -42,7 +42,7 @@ const App: React.FC = () => {
   const toggleBasket = () => {
     setBasket(!basket);
   };
-
+  //afafafafa
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
     return function () {
