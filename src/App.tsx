@@ -6,6 +6,7 @@ import Basket from "./pages/Basket";
 import SkeletonItems from "./components/SkeletonItems";
 import Header from "./components/Header";
 import { current } from "@reduxjs/toolkit";
+
 interface Sneaker {
   name: string;
   image: string;
