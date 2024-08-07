@@ -1,29 +1,41 @@
-import React, { useState } from "react";
-import { useDispatch} from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { setItemInCart } from "../redux/cart/reducer";
+import { UseSelector } from "react-redux";
+
 interface CardProps {
   element: {
-    id:number;
+    id: number;
     name: string;
     image: string;
-    price: string
+    price: string;
   };
 }
 
 const Card: React.FC<CardProps> = ({ element }) => {
   const [changeFavorite, setChangeFavorite] = useState<boolean>();
   const [changeAdd, setChangeAdd] = useState<boolean>();
+  const isMounted = useRef(false);
   const dispatch = useDispatch();
   const toggleAdd = () => {
     setChangeAdd(!changeAdd);
-    dispatch(setItemInCart(element))
+    dispatch(setItemInCart(element));
   };
 
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
-    dispatch(setItemInCart(element))
   };
-
+  useEffect(() => {
+    console.log('useEffect сработал');
+    if (isMounted.current) {
+      console.log('basketItems изменены', element);
+      const json = JSON.stringify(element);
+      localStorage.setItem("cardItems", json);
+    } else {
+      isMounted.current = true;
+      console.log('Первый рендер');
+    }
+  }, [element]);
   return (
     <>
       <div className="card">

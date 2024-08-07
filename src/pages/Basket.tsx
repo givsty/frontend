@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CardBasket from "../components/CardBasket";
 import { ISneaker } from "../types/types";
 import { useSelector } from "react-redux";
-
+import { useRef } from "react";
 interface BasketProps {
   toggleBasket: () => void;
 }
 
 const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
-  const baksetItems = useSelector(
+  let summBasket = 0
+  const basketItems = useSelector(
     (state: { cart: { itemsInCart: ISneaker[] } }) => state.cart.itemsInCart
   );
-  let summBasket = 0
-  console.log(summBasket)
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -20,7 +20,7 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
           <span>Назад</span>
         </div>
         <h3>Корзина</h3>
-        {baksetItems.map((element, index) => {
+        {basketItems.map((element, index) => {
           let price = Number(element.price)
           summBasket += price
           return (
