@@ -1,4 +1,12 @@
-export const getCartFromLS = () => {
-  const data = localStorage.getItem("cardItem");
-  return data ? JSON.parse(data) : [];
+
+interface Item {
+  id: number;
+  name: string;
+  image: string;
+}
+
+export const getCartFromLS = (): Item[] => {
+  const data = localStorage.getItem('cardItems');
+  const items = data ? JSON.parse(data) : [];
+  return Array.isArray(items) ? items : [];
 };

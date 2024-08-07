@@ -15,7 +15,6 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ element }) => {
   const [changeFavorite, setChangeFavorite] = useState<boolean>();
   const [changeAdd, setChangeAdd] = useState<boolean>();
-  const isMounted = useRef(false);
   const dispatch = useDispatch();
   const toggleAdd = () => {
     setChangeAdd(!changeAdd);
@@ -25,17 +24,6 @@ const Card: React.FC<CardProps> = ({ element }) => {
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
   };
-  useEffect(() => {
-    console.log('useEffect сработал');
-    if (isMounted.current) {
-      console.log('basketItems изменены', element);
-      const json = JSON.stringify(element);
-      localStorage.setItem("cardItems", json);
-    } else {
-      isMounted.current = true;
-      console.log('Первый рендер');
-    }
-  }, [element]);
   return (
     <>
       <div className="card">
