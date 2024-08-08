@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setItemInCart } from "../redux/cart/reducer";
-import { UseSelector } from "react-redux";
 
 interface CardProps {
   element: {
@@ -24,29 +23,31 @@ const Card: React.FC<CardProps> = ({ element }) => {
   const toggleFavoritesActive = () => {
     setChangeFavorite(!changeFavorite);
   };
+
   return (
     <>
       <div className="card">
-        <img
-          src={
-            changeFavorite
-              ? "/images/header/content/favoriteActive.png"
-              : "/images/header/content/favoriteDefault.png"
-          }
-          alt=""
-          onClick={toggleFavoritesActive}
-        />
-        <ul>
-          <li>
-            <img src={element.image} alt="" width={133} height={112} />
-          </li>
-        </ul>
-        <span className="">{element.name}</span>
-        <div className="card__footer">
-          <ul>
-            <li>{element.price}</li>
-          </ul>
-          <div className="add">
+        <div className="card-header">
+          <img
+            src={
+              changeFavorite
+                ? "/images/header/content/favoriteActive.png"
+                : "/images/header/content/favoriteDefault.png"
+            }
+            alt=""
+            onClick={toggleFavoritesActive}
+          />
+        </div>
+        <img width={133} height={112} src={element.image} alt="" />
+        <div className="card-content">
+          <div className="card-contend___content">
+            <h5>Кроссовки</h5>
+            <p>{element.name}</p>
+            <span>Цена:</span>
+            <h5>{element.price} руб.</h5>
+          </div>
+
+          <div className="card-content__favorite">
             <img
               src={
                 changeAdd

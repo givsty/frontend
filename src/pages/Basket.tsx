@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardBasket from "../components/CardBasket";
+import EmptyBasket from "../components/EmptyBasket";
 import { ISneaker } from "../types/types";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
@@ -31,14 +32,14 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
           <span>Назад</span>
         </div>
         <h3>Корзина</h3>
-        {basketItems.map((element, index) => {
+        {basketItems.length !== 0 ? basketItems.map((element, index) => {
           let price = Number(element.price)
           summBasket += price
           return (
           <CardBasket element={element} key={index} />
-        );
-        })}
-        <ul>
+        ) ;
+        }): <EmptyBasket toggleBasket={toggleBasket}/>}
+        <ul className="overlay__footer">
           <li><span>Итого<div className="basket-line"></div>{summBasket}</span></li>
         </ul>
       </div>

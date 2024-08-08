@@ -10,7 +10,7 @@ const CardBasket: React.FC<CardBasketProps> = ({element}) => {
   return (
     <div className="drawer__content" >
       <div className='drawer__content__close__btn'>X</div>
-      <img src={element.image} alt="" />
+      <img width={133} height={112} src={element.image} alt="" />
       <span>{element.name}</span>
       <span>{element.price}</span>
     </div>
