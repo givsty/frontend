@@ -10,3 +10,4 @@ export const getCartFromLS = (): Item[] => {
   const items = data ? JSON.parse(data) : [];
   return Array.isArray(items) ? items : [];
 };
+

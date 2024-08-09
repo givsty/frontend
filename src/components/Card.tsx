@@ -40,23 +40,26 @@ const Card: React.FC<CardProps> = ({ element }) => {
         </div>
         <img width={133} height={112} src={element.image} alt="" />
         <div className="card-content">
-          <div className="card-contend___content">
-            <h5>Кроссовки</h5>
-            <p>{element.name}</p>
-            <span>Цена:</span>
-            <h5>{element.price} руб.</h5>
-          </div>
-
-          <div className="card-content__favorite">
-            <img
-              src={
-                changeAdd
-                  ? "images/header/content/addActive.png"
-                  : "images/header/content/add.png"
-              }
-              alt=""
-              onClick={toggleAdd}
-            />
+          <span>Кроссовки</span>
+          <p>{element.name}</p>
+          <br />
+          <div className="card-content___wrapper">
+            <div className="card-content___wrapper-price">
+              <span>Цена:</span>
+              <h5>{element.price} руб.</h5>
+            </div>
+            <div className="card-content__favorite">
+              <img
+                width={30}
+                src={
+                  changeAdd
+                    ? "images/header/content/addActive.png"
+                    : "images/header/content/add.png"
+                }
+                alt=""
+                onClick={toggleAdd}
+              />
+            </div>
           </div>
         </div>
       </div>

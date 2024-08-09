@@ -104,13 +104,20 @@ body {
       margin-bottom: 30px;
       transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
       .card-header {
-        cursor: pointer;
+        img {
+          cursor: pointer;
+        }
       }
-      .card-content {
+      .card-content___wrapper {
         display: flex;
+        justify-content: space-between;
+        .card-content___wrapper-price {
+          span {
+            color: gray;
+          }
+        }
       }
       .card-content__favorite {
-        margin-top: 40px;
         img {
           cursor: pointer;
         }
