@@ -15,3 +15,4 @@ const EmptyBasket: React.FC<EmptyBaskettProps> = ({ toggleBasket }) => {
 };
 
 export default EmptyBasket;
+
