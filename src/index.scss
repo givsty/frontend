@@ -61,6 +61,12 @@ body {
     display: flex;
     padding: 40px;
     justify-content: space-between;
+    .wrapper__content__inner-list {
+      .dropdown {
+        cursor: pointer;
+      }
+      margin-top: 15px;
+    }
 
     .wrapper__content__inner__input {
       padding-top: 13px;
@@ -249,4 +255,24 @@ body {
     }
   }
 
+}
+
+
+.sortable {
+  display: flex;
+  flex-direction: column; /* или row в зависимости от вашего дизайна */
+}
+
+.item {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+}
+
+.sort-asc {
+  order: 1; /* Порядок при сортировке по возрастанию */
+}
+
+.sort-desc {
+  order: -1; /* Порядок при сортировке по убыванию */
 }

@@ -16,14 +16,11 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
   );
   
   useEffect(() => {
-    console.log('useEffect сработал');
     if (isMounted.current) {
-      console.log('basketItems изменены', basketItems);
       const json = JSON.stringify(basketItems);
       localStorage.setItem("cardItems", json);
     } else {
       isMounted.current = true;
-      console.log('Первый рендер');
     }
   }, [basketItems]);
 

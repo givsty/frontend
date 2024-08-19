@@ -1,9 +1,8 @@
 import React from "react";
-import Main from "./pages/Main";
-
+import Home from "./pages/Home";
 const App: React.FC = () => {
   return (
-    <Main />
+    <Home />
   );
 };
 
