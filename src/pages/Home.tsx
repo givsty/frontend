@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent} from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import Card from "../components/Card";
 import Input from "../ui/Input";
 import { ISneaker } from "../types/types";
@@ -22,54 +22,34 @@ const Home: React.FC = () => {
   const [basket, setBasket] = useState<boolean>(true);
   const [page, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState<boolean>(true);
-  const [selectedOption, setSelectedOption] = useState('')
-  const [sortSneakersLow, setSortSneakersLow] = useState<Sneaker[]>([])
-  const [sortSneakersHigh, setSortSneakersHigh] = useState<Sneaker[]>([])
+  const [selectedOption, setSelectedOption] = useState("");
+  const [sortSneakers, setSortSneakers] = useState<Sneaker[]>(sneakers);
 
-  //Сортировка по возрастанию
-  const sortingItemLowest = (arr:Sneaker[]) => {
-    for (let j = arr.length - 1; j > 0; j--) {
-      for (let i = 0; i < j; i++) {
-        if (arr[i].price > arr[i + 1].price) {
-          let temp = arr[i];
-          arr[i] = arr[i + 1];
-          arr[i + 1] = temp;
-        }
-      }
-    }
-    return setSortSneakersLow(arr)
-  }
+  //Sort low to high
+  const sortingItemLowest = (arr: Sneaker[]): Sneaker[] => {
+    return [...arr].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+  };
+  //Sort high to low
+  const sortingItemHighest = (arr: Sneaker[]): Sneaker[] => {
+    return [...arr].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+  };
 
-
-  //Сортировка по убыванию
-  const sortingItemHighest = (arr: Sneaker[]) => {
-    for (let j = arr.length - 1; j > 0; j--) {
-      for (let i = 0; i < j; i++) {
-        // Измените условие с > на < для сортировки по убыванию
-        if (arr[i].price < arr[i + 1].price) {
-          let temp = arr[i];
-          arr[i] = arr[i + 1];
-          arr[i + 1] = temp;
-        }
-      }
-    }
-    return setSortSneakersHigh(arr);
-  }
-  
   // Response to mock api
   useEffect(() => {
-    if(fetching) {
-      fetch(`https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?page=${page}&limit=12`)
+    if (fetching) {
+      fetch(
+        `https://652ad3c14791d884f1fd67ca.mockapi.io/Sneakers?page=${page}&limit=12`
+      )
         .then((response) => response.json())
         .then((res) => {
           setIsloading(false);
-          setSneakers((prevSneakers) => [...prevSneakers, ...res])
-          setCurrentPage(page => page += 1)
-          setFetching(false)
+          setSneakers((prevSneakers) => [...prevSneakers, ...res]);
+          setCurrentPage((page) => (page += 1));
+          setFetching(false);
         })
         .catch((err) => {
-          console.log(err)
-          setFetching(false)
+          console.log(err);
+          setFetching(false);
         });
     }
   }, [fetching, page]);
@@ -81,14 +61,15 @@ const Home: React.FC = () => {
   const sort = (event: ChangeEvent<HTMLSelectElement>): void => {
     const value = event.target.value;
     setSelectedOption(value);
-    if(selectedOption === 'highest') {
-      sortingItemLowest(filteredSneakers)
-    } else if (selectedOption === 'lowest') {
-      sortingItemHighest(filteredSneakers)
+
+    if (value === "highest") {
+      setSortSneakers(sortingItemHighest([...filteredSneakers]));
+    } else if (value === "lowest") {
+      setSortSneakers(sortingItemLowest([...filteredSneakers]));
     }
   };
 
-  //Block scroll on modal 
+  //Block scroll on modal
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
     return function () {
@@ -134,9 +115,11 @@ const Home: React.FC = () => {
         <h1>Все кроссовки</h1>
         <div className="wrapper__content__inner-list">
           <span>Сортировка по:</span>
-          <select className="dropdown" onChange={event => sort(event)}>
-            <option disabled selected>Выберите тип сортировки</option>
-            <option value="highest" >Возрастанию</option>
+          <select className="dropdown" onChange={(event) => sort(event)}>
+            <option disabled selected>
+              Выберите тип сортировки
+            </option>
+            <option value="highest">Возрастанию</option>
             <option value="lowest">Убыванию</option>
           </select>
         </div>
@@ -146,10 +129,12 @@ const Home: React.FC = () => {
       </div>
       <div className="card__sneakers">
         {isloading
-          ? [...new Array(10)].map((_, index) => <SkeletonItems key={index} />) : sortSneakersHigh.map((element: Sneaker, index) => {
-              return <Card element={element} key={index} />
-            }) 
-        }
+          ? [...new Array(10)].map((_, index) => <SkeletonItems key={index} />)
+          : (sortSneakers.length > 0 ? sortSneakers : filteredSneakers).map(
+              (element: Sneaker, index) => (
+                <Card element={element} key={index} />
+              )
+            )}
       </div>
     </div>
   );
