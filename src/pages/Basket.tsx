@@ -14,22 +14,21 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
   const basketItems = useSelector(
     (state: { cart: { itemsInCart: ISneaker[] } }) => state.cart.itemsInCart
   );
+  
   useEffect(() => {
-    console.log('useEffect сработал');
     if (isMounted.current) {
-      console.log('basketItems изменены', basketItems);
       const json = JSON.stringify(basketItems);
       localStorage.setItem("cardItems", json);
     } else {
       isMounted.current = true;
-      console.log('Первый рендер');
     }
   }, [basketItems]);
+
   return (
     <div className="overlay">
       <div className="drawer">
         <div className="drawer__close__btn" onClick={toggleBasket}>
-          <span>Назад</span>
+          <button>Назад</button>
         </div>
         <h3>Корзина</h3>
         {basketItems.length !== 0 ? basketItems.map((element, index) => {

@@ -61,11 +61,18 @@ body {
     display: flex;
     padding: 40px;
     justify-content: space-between;
+    .wrapper__content__inner-list {
+      .dropdown {
+        cursor: pointer;
+      }
+      margin-top: 15px;
+    }
 
     .wrapper__content__inner__input {
       padding-top: 13px;
 
       input {
+
         border: 1px solid #cecece;
         box-sizing: border-box;
         border: 1px solid rgb(243, 243, 243);
@@ -76,13 +83,15 @@ body {
         box-sizing: border-box;
         border: 1px solid rgb(243, 243, 243);
         border-radius: 10px;
-
-        :hover {
-          color: rgb(243, 243, 243);
+        
+        &:hover {
+          background-color: white;
         }
-        :focus {
+
+        &:focus {
           box-shadow: 0 0 5px rgba(81, 203, 238, 1);
         }
+
       }
     }
   }
@@ -103,20 +112,27 @@ body {
       margin-right: 30px;
       margin-bottom: 30px;
       transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+      &:hover {
+        
+      }
       .card-header {
         img {
           cursor: pointer;
         }
       }
+
       .card-content___wrapper {
         display: flex;
         justify-content: space-between;
+
         .card-content___wrapper-price {
           span {
             color: gray;
           }
         }
       }
+
       .card-content__favorite {
         img {
           cursor: pointer;
@@ -134,20 +150,60 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    
+
     .empty__basket {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      height: 100vh;
+
+      .empty__basket__wrapper {
+        text-align: center;
+        margin-bottom: 150px;
+        
+        h3 {
+          padding: 10px
+        }
+
+        p {
+          color: rgb(122, 122, 122);
+          font-family: Inter;
+          font-size: 16px;
+          text-align: center;
+        }
+
+        button {
+          border: 2px solid rgb(255, 255, 255);
+          width: 245px;
+          height: 55px;
+          border-radius: 18px;
+          background: rgb(157, 212, 88);
+          margin: 40px;
+          color: rgb(255, 255, 255);
+          //Шрифт
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 19px;
+          letter-spacing: 0%;
+          text-align: center;
+          cursor: pointer;
+
+          &:hover {
+            background-color: wheat;
+          }
+        }
+      }
     }
+
     .basket-line {
       width: 167px;
       height: 1px;
       box-sizing: border-box;
       border: 1px dashed rgb(223, 223, 223);
     }
+
     .drawer {
       box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.1);
       background: rgb(255, 255, 255);
@@ -156,26 +212,6 @@ body {
       height: 1059px;
       right: 0;
       padding: 40px;
-      .overlay__footer {
-        list-style: none;
-      }
-
-      .drawer__close__btn {
-        border-radius: 20px;
-        border: 1px solid rgb(243, 243, 243);
-        width: 60px;
-        height: 100;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 40px;
-        cursor: pointer;
-
-        span {
-          align-items: center;
-        }
-        
-      }
 
       .drawer__content {
         margin-top: 40px;
@@ -184,15 +220,59 @@ body {
         border-radius: 20px;
         background: rgb(255, 255, 255);
         padding: 40px;
-        .drawer__content__close__btn {
-          cursor: pointer;
-        }
+
         img {
           width: 50px;
           height: 30px;
         }
       }
+      .drawer__close__btn {
+        margin-bottom: 40px;
+
+        button {
+          border: 2px solid rgb(255, 255, 255);
+          width: 100px;
+          height: 45px;
+          border-radius: 18px;
+          background: rgb(157, 212, 88);
+          color: rgb(255, 255, 255);
+          //Шрифт
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+  
+          &:hover {
+            background-color: wheat;
+          }
+  
+        }
+      }
+      .overlay__footer {
+        list-style: none;
+      }
+
     }
   }
 
+}
+
+
+.sortable {
+  display: flex;
+  flex-direction: column; /* или row в зависимости от вашего дизайна */
+}
+
+.item {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+}
+
+.sort-asc {
+  order: 1; /* Порядок при сортировке по возрастанию */
+}
+
+.sort-desc {
+  order: -1; /* Порядок при сортировке по убыванию */
 }

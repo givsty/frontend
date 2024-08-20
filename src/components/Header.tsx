@@ -1,7 +1,9 @@
 import React from "react";
+
 interface HeaderProps {
   toggleBasket: () => void
 }
+
 const Header: React.FC<HeaderProps> = ({toggleBasket}) => {
   return (
     <header>

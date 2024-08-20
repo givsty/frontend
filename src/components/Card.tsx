@@ -29,6 +29,8 @@ const Card: React.FC<CardProps> = ({ element }) => {
       <div className="card">
         <div className="card-header">
           <img
+            width={30}
+            height={30}
             src={
               changeFavorite
                 ? "/images/header/content/favoriteActive.png"
@@ -51,6 +53,7 @@ const Card: React.FC<CardProps> = ({ element }) => {
             <div className="card-content__favorite">
               <img
                 width={30}
+                height={30}
                 src={
                   changeAdd
                     ? "images/header/content/addActive.png"
