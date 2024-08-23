@@ -143,11 +143,11 @@ body {
   }
 
   .overlay {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 1000;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -210,10 +210,13 @@ body {
     .drawer {
       box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.1);
       background: rgb(255, 255, 255);
-      position: absolute;
+      position: fixed;
       width: 385px;
       height: 1059px;
       right: 0;
+      top: 0;
+      height: 100%;
+      overflow-y: auto;
       padding: 40px;
       display: flex;
       flex-direction: column;
