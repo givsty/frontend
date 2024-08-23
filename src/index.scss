@@ -61,10 +61,12 @@ body {
     display: flex;
     padding: 40px;
     justify-content: space-between;
+
     .wrapper__content__inner-list {
       .dropdown {
         cursor: pointer;
       }
+
       margin-top: 15px;
     }
 
@@ -83,7 +85,7 @@ body {
         box-sizing: border-box;
         border: 1px solid rgb(243, 243, 243);
         border-radius: 10px;
-        
+
         &:hover {
           background-color: white;
         }
@@ -113,9 +115,8 @@ body {
       margin-bottom: 30px;
       transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-      &:hover {
-        
-      }
+      &:hover {}
+
       .card-header {
         img {
           cursor: pointer;
@@ -152,6 +153,7 @@ body {
     overflow: hidden;
 
     .empty__basket {
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -161,7 +163,8 @@ body {
       .empty__basket__wrapper {
         text-align: center;
         margin-bottom: 150px;
-        
+        overflow: hidden;
+
         h3 {
           padding: 10px
         }
@@ -198,7 +201,7 @@ body {
     }
 
     .basket-line {
-      width: 167px;
+      width: 300px;
       height: 1px;
       box-sizing: border-box;
       border: 1px dashed rgb(223, 223, 223);
@@ -212,20 +215,103 @@ body {
       height: 1059px;
       right: 0;
       padding: 40px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+
+      .checkout-button {
+        width: 100%;
+        height: 55px;
+        background: #9dd458;
+        border-radius: 18px;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: #8cc34b;
+        }
+      }
+
+      .dashed-line {
+        flex-grow: 1;
+        height: 1px;
+        border-bottom: 1px dashed #dfdfdf;
+        margin: 0 7px;
+      }
+
+      .drawer__items {
+        flex-grow: 1;
+        overflow-y: auto;
+      }
+
+      .drawer__footer {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eaeaea;
+      }
+
+      .drawer__footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        span {
+          font-size: 16px;
+        }
+      }
 
       .drawer__content {
-        margin-top: 40px;
+        margin-top: 30px;
+        width: 100%;
+        padding: 20px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
         box-sizing: border-box;
         border: 1px solid rgb(243, 243, 243);
         border-radius: 20px;
-        background: rgb(255, 255, 255);
-        padding: 40px;
 
-        img {
-          width: 50px;
-          height: 30px;
+        background: rgb(255, 255, 255);
+
+        .close-btn {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
         }
+
+        .drawer__description {
+          .price {
+            font-weight: bold;
+            font-size: 14px;
+          }
+
+          flex-grow: 1;
+
+          p {
+            font-size: 16px;
+            margin-bottom: 8px;
+          }
+
+
+        }
+
+        .basket__card-img {
+          width: 70px;
+          height: 70px;
+          object-fit: contain;
+          margin-right: 20px;
+        }
+
       }
+
       .drawer__close__btn {
         margin-bottom: 40px;
 
@@ -241,15 +327,18 @@ body {
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-  
+
           &:hover {
-            background-color: wheat;
+            background-color: #8cc34b;
           }
-  
+
         }
       }
+
       .overlay__footer {
         list-style: none;
+        display: flex;
+        flex-direction: column;
       }
 
     }
@@ -260,7 +349,7 @@ body {
 
 .sortable {
   display: flex;
-  flex-direction: column; /* или row в зависимости от вашего дизайна */
+  flex-direction: column;
 }
 
 .item {
@@ -270,9 +359,9 @@ body {
 }
 
 .sort-asc {
-  order: 1; /* Порядок при сортировке по возрастанию */
+  order: 1;
 }
 
 .sort-desc {
-  order: -1; /* Порядок при сортировке по убыванию */
+  order: -1;
 }

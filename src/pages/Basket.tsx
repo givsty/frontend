@@ -4,6 +4,7 @@ import EmptyBasket from "../components/EmptyBasket";
 import { ISneaker } from "../types/types";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
+
 interface BasketProps {
   toggleBasket: () => void;
 }
@@ -14,7 +15,7 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
   const basketItems = useSelector(
     (state: { cart: { itemsInCart: ISneaker[] } }) => state.cart.itemsInCart
   );
-  
+  const drawerItemsStyle: React.CSSProperties = basketItems.length === 0 ? { overflow: 'hidden' } : {};
   useEffect(() => {
     if (isMounted.current) {
       const json = JSON.stringify(basketItems);
@@ -31,16 +32,30 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
           <button>Назад</button>
         </div>
         <h3>Корзина</h3>
-        {basketItems.length !== 0 ? basketItems.map((element, index) => {
-          let price = Number(element.price)
-          summBasket += price
-          return (
-          <CardBasket element={element} key={index} />
-        ) ;
-        }): <EmptyBasket toggleBasket={toggleBasket}/>}
-        <ul className="overlay__footer">
-          <li><span>Итого<div className="basket-line"></div>{summBasket}</span></li>
-        </ul>
+        <div className="drawer__items" style={drawerItemsStyle}>
+          {basketItems.length !== 0 ? basketItems.map((element, index) => {
+            let price = Number(element.price);
+            summBasket += price;
+            return (
+              <CardBasket element={element} key={index} />
+            );
+          }) : <EmptyBasket toggleBasket={toggleBasket}/>}
+        </div>
+        {basketItems.length !== 0 && (
+          <div className="drawer__footer">
+            <div className="drawer__footer-row">
+              <span>Итого:</span>
+              <div className="dashed-line"></div>
+              <span>{summBasket} руб.</span>
+            </div>
+            <div className="drawer__footer-row">
+              <span>Налог 5%:</span>
+              <div className="dashed-line"></div>
+              <span>{Math.round(summBasket * 0.05)} руб.</span>
+            </div>
+            <button className="checkout-button">Оформить заказ</button>
+          </div>
+        )}
       </div>
     </div>
   );

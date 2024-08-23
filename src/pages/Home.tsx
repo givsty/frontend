@@ -63,9 +63,9 @@ const Home: React.FC = () => {
     setSelectedOption(value);
 
     if (value === "highest") {
-      setSortSneakers(sortingItemHighest([...filteredSneakers]));
-    } else if (value === "lowest") {
       setSortSneakers(sortingItemLowest([...filteredSneakers]));
+    } else if (value === "lowest") {
+      setSortSneakers(sortingItemHighest([...filteredSneakers]));
     }
   };
 
